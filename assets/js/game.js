@@ -69,12 +69,22 @@ var fight = function(enemyName) {
   }
 };
 var startGame = function(){
+    playerHealth = 100;
+    playerAttack = 10;
+    playerMoney = 10;
     for (var i = 0; i < enemyNames.length; i++) {
     if (playerHealth > 0) {
         window.alert('Welcome to Robot Gladiators! Round ' + (i + 1));
         var pickedEnemyName = enemyNames[i];
         enemyHealth = 50;
         fight(pickedEnemyName);
+        if(playerHealth > 0 && i < enemyNames.length - 1){
+            var storeConfirm = window.confirm("The fight is over, visit the store before the next round?");
+
+            if(storeConfirm){
+                shop();
+            }
+        }
     }
     else {
         window.alert('You have lost your robot in battle! Game Over!');
@@ -86,6 +96,8 @@ endGame();
 };
 
 var endGame = function(){
+    window.alert("The game has now ended. Let's see how you did!");
+ 
     if(playerHealth>0){
         window.alert("Great job, you've survived the game! You now have a score of " + playerMoney + ".");
     }
@@ -93,8 +105,10 @@ var endGame = function(){
         window.alert("You've lost your robot in battle.");
     }
     
-    window.alert("The game has now ended. Let's see how you did!");
 }
 
+var shop = function(){
+    shopOptionPrompt = window.prompt("Would you like to REFILL your health, UPGRADEE your attack, or LEAVE the store? Please enter one: 'REFILL', 'UPGRADE', or 'LEAVE' to make a choice.")
+};
 
 startGame();
